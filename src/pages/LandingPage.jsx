@@ -3,6 +3,7 @@ import Feautures from "../components/Feautures";
 import Contact from "../components/Contact";
 import SmoothScroll from "../smoother/Smoother";
 import Footer from "../components/Footer";
+import Testimonial from "../components/Testimonial";
 
 
 export default function LandingPage(){
@@ -12,6 +13,7 @@ export default function LandingPage(){
         <HeroSection />
         <Feautures />
         <Contact />
+        <Testimonial />
         <Footer />
         </SmoothScroll>
 
