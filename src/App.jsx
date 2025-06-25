@@ -1,25 +1,25 @@
-import Contact from "./components/Contact";
-import Feautures from "./components/Feautures";
-import Footer from "./components/Footer";
-import Header from "./components/Header";
-import HeroSection from "./components/HeroSection";
+
+import { Route, Routes } from "react-router-dom";
+import LandingPage from "./pages/LandingPage";
 import SmoothScroll from "./smoother/Smoother";
-import React from "react";
+import Menu from "./pages/Menu";
 
-export default function(){
+import Navbar from "./components/Navbar";
+import Subscription from "./pages/Subscription";
+import ContactPage from "./pages/ContactPage";
+
+
+export default function App(){
   return(
-    <SmoothScroll>
-       <div className="font-sans text-gray-800 bg-white min-h-screen">
-      <Header />
-
-      <main className="container mx-auto px-4 py-10">
-        <HeroSection />
-        <Feautures />
-        <Contact />
-      </main>
-
-      <Footer />
-    </div>
-    </SmoothScroll>
+    <>
+    <Navbar />
+       <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/menu" element={<Menu />} />
+        <Route path="/subscription" element={<Subscription />} />
+        <Route path="/contact" element={<ContactPage />} />
+       </Routes>
+      
+    </>
   );
 }
