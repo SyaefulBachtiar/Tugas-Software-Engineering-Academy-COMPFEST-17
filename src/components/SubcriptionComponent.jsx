@@ -1,68 +1,180 @@
-// src/pages/Subscription.jsx
+import { useState } from "react";
+
 export default function SubscriptionComponent() {
+  const [form, setForm] = useState({
+    name: "",
+    phone: "",
+    package: "",
+    meals: [],
+    days: [],
+    allergy: "",
+  });
+
+  const [price, setPrice] = useState(0);
+  const [submitted, setSubmitted] = useState(false);
+
+  const packageOptions = {
+    "Paket Diet": 30000,
+    "Paket Protein": 40000,
+    "Paket Royal": 60000,
+  };
+
+  const mealOptions = ["Sarapan", "Makan Siang", "Makan Malam"];
+  const dayOptions = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"];
+
+  const calculatePrice = (selectedPackage, meals, days) => {
+    const basePrice = packageOptions[selectedPackage] || 0;
+    return basePrice * meals.length * days.length * 4.3
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleCheckbox = (name, value, group) => {
+    setForm((prev) => {
+      const current = prev[group];
+      const updated = current.includes(value)
+        ? current.filter((v) => v !== value)
+        : [...current, value];
+
+      return { ...prev, [group]: updated };
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!form.name || !form.phone || !form.package || form.meals.length === 0 || form.days.length === 0) {
+      alert("Mohon lengkapi semua bidang yang wajib diisi (*)");
+      return;
+    }
+
+    const total = calculatePrice(form.package, form.meals, form.days);
+    setPrice(total);
+    setSubmitted(true);
+  };
+
   return (
-    <div className="container mx-auto px-4 py-10 font-inter">
-      <h2 className="text-3xl font-bold mb-6">Langganan Paket Makanan</h2>
-
-      <section className="mb-10 border p-5 rounded-lg bg-white shadow-md">
-        <p className="text-lg text-gray-700 mb-4">
-          Dapatkan makanan sehat secara rutin langsung ke depan pintu Anda! Pilih paket langganan yang sesuai dengan kebutuhan dan gaya hidup Anda.
-        </p>
-        <ul className="list-disc list-inside text-gray-800 text-base space-y-2">
-          <li>Pengiriman harian tanpa repot memasak</li>
-          <li>Harga lebih hemat untuk pelanggan tetap</li>
-          <li>Dapat disesuaikan berdasarkan preferensi gizi Anda</li>
-        </ul>
-      </section>
-
-      <section className="mb-10 p-5 border rounded-md shadow-md">
-        <h3 className="text-2xl font-semibold mb-4">Pilih Paket Langganan</h3>
-        <div className="grid md:grid-cols-3 gap-6">
-          <div className="border rounded-lg p-4 shadow">
-            <h4 className="font-bold text-lg mb-2">Paket 7 Hari</h4>
-            <p className="text-gray-700 mb-2">Rp 300.000</p>
-            <p className="text-sm text-gray-600">Termasuk 7 kali pengiriman makanan sehat</p>
-          </div>
-          <div className="border rounded-lg p-4 shadow">
-            <h4 className="font-bold text-lg mb-2">Paket 14 Hari</h4>
-            <p className="text-gray-700 mb-2">Rp 580.000</p>
-            <p className="text-sm text-gray-600">Lebih hemat! Cocok untuk dua minggu</p>
-          </div>
-          <div className="border rounded-lg p-4 shadow">
-            <h4 className="font-bold text-lg mb-2">Paket 30 Hari</h4>
-            <p className="text-gray-700 mb-2">Rp 1.200.000</p>
-            <p className="text-sm text-gray-600">Langganan satu bulan penuh</p>
-          </div>
-        </div>
-      </section>
-
-      <section className="p-5 border rounded-md shadow-md">
-        <h3 className="text-2xl font-semibold mb-4">Formulir Pendaftaran</h3>
-        <form className="grid gap-4 max-w-md">
+    <div className="container mx-auto px-4 py-10 flex flex-col justify-center">
+      <form onSubmit={handleSubmit} className="w-screen bg-white p-6 rounded shadow space-y-6">
+        <h2 className="text-3xl font-bold mb-6">Formulir Langganan Paket Makanan</h2>
+        {/* Nama */}
+        <div>
+          <label className="font-semibold block mb-1">
+            Nama Lengkap*:
+          </label>
           <input
             type="text"
-            placeholder="Nama Lengkap"
-            className="border p-2 rounded"
+            name="name"
+            value={form.name}
+            onChange={handleChange}
+            className="w-full border p-2 rounded"
+            required
           />
+        </div>
+
+        {/* Nomor Telepon */}
+        <div>
+          <label className="font-semibold block mb-1">
+            Nomor Telepon Aktif*:
+          </label>
           <input
             type="tel"
-            placeholder="Nomor Telepon"
-            className="border p-2 rounded"
+            name="phone"
+            value={form.phone}
+            onChange={handleChange}
+            className="w-full border p-2 rounded"
+            required
           />
-          <select className="border p-2 rounded">
-            <option value="">Pilih Paket Langganan</option>
-            <option value="7">7 Hari</option>
-            <option value="14">14 Hari</option>
-            <option value="30">30 Hari</option>
-          </select>
-          <button
-            type="submit"
-            className="bg-[#0099ff] text-white py-2 rounded hover:bg-green-700"
+        </div>
+
+        {/* Pilihan Paket */}
+        <div>
+          <label className="font-semibold block mb-1">Pilih Paket*:</label>
+          <select
+            name="package"
+            value={form.package}
+            onChange={handleChange}
+            className="w-full border p-2 rounded"
+            required
           >
-            Daftar Sekarang
-          </button>
-        </form>
-      </section>
+            <option value="">-- Pilih Paket --</option>
+            {Object.entries(packageOptions).map(([label, price]) => (
+              <option key={label} value={label}>
+                {label} – Rp{price.toLocaleString("id-ID")}/makanan
+              </option>
+            ))}
+          </select>
+        </div>
+
+        {/* Jenis Makanan */}
+        <div>
+          <label className="font-semibold block mb-1">Jenis Makanan*:</label>
+          <div className="flex gap-4 flex-wrap">
+            {mealOptions.map((meal) => (
+              <label key={meal} className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={form.meals.includes(meal)}
+                  onChange={() => handleCheckbox("meals", meal, "meals")}
+                />
+                {meal}
+              </label>
+            ))}
+          </div>
+        </div>
+
+        {/* Hari Pengiriman */}
+        <div>
+          <label className="font-semibold block mb-1">Hari Pengiriman*:</label>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+            {dayOptions.map((day) => (
+              <label key={day} className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={form.days.includes(day)}
+                  onChange={() => handleCheckbox("days", day, "days")}
+                />
+                {day}
+              </label>
+            ))}
+          </div>
+        </div>
+
+        {/* Alergi */}
+        <div>
+          <label className="font-semibold block mb-1">Alergi / Batasan Diet:</label>
+          <textarea
+            name="allergy"
+            value={form.allergy}
+            onChange={handleChange}
+            rows={3}
+            className="w-full border p-2 rounded"
+            placeholder="Contoh: Kacang, Susu, Gluten"
+          />
+        </div>
+
+        <button
+          type="submit"
+          className="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700"
+        >
+          Hitung & Kirim
+        </button>
+      </form>
+
+      {submitted && (
+        <div className="mt-8 p-4 bg-green-100 border-l-4 border-green-600 rounded">
+          <h3 className="text-xl font-bold mb-2 text-green-700">Total Harga Langganan Anda:</h3>
+          <p className="text-lg font-semibold text-green-800">
+            Rp{price.toLocaleString("id-ID")}
+          </p>
+        </div>
+      )}
     </div>
   );
 }
