@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+
+import { db } from "../firebase/config";
+import { collection, addDoc, getDocs, Timestamp } from "firebase/firestore";
 
 export default function Testimonial() {
   const [formData, setFormData] = useState({
@@ -12,33 +15,45 @@ export default function Testimonial() {
     rating: "5",
   });
 
-  const [testimonials, setTestimonials] = useState([
-    {
-      name: "Andi",
-      message: "Makanannya enak dan sehat! Pengiriman juga cepat.",
-      rating: 5,
-    },
-    {
-      name: "Sinta",
-      message: "Paket keto-nya luar biasa. Saya merasa lebih sehat!",
-      rating: 4,
-    },
-    {
-      name: "Rudi",
-      message: "Langganan 30 hari sangat worth it, hemat dan praktis.",
-      rating: 5,
-    },
-  ]);
+  const [testimonials, setTestimonials] = useState([]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const newTesti = {
-      name: formData.name,
-      message: formData.message,
-      rating: parseInt(formData.rating),
+  // Fetch data dari Firestore
+  useEffect(() => {
+    const fetchTestimonial = async () => {
+      try {
+        const snapshot = await getDocs(collection(db, "testimonials")); // koleksi disarankan plural
+        const data = snapshot.docs.map((doc) => doc.data());
+        setTestimonials(data.reverse()); // menampilkan yang terbaru di atas
+      } catch (error) {
+        console.error("Gagal memuat testimoni:", error);
+      }
     };
-    setTestimonials([newTesti, ...testimonials]);
-    setFormData({ name: "", message: "", rating: "5" });
+
+    fetchTestimonial();
+  }, []);
+
+  // Submit ke Firestore
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      await addDoc(collection(db, "testimonials"), {
+        ...formData,
+        rating: parseInt(formData.rating),
+        createdAt: Timestamp.now(),
+      });
+
+      const newTesti = {
+        name: formData.name,
+        message: formData.message,
+        rating: parseInt(formData.rating),
+      };
+
+      setTestimonials([newTesti, ...testimonials]);
+      setFormData({ name: "", message: "", rating: "5" });
+    } catch (error) {
+      console.error("Gagal mengirim testimoni:", error);
+    }
   };
 
   return (

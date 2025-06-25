@@ -1,3 +1,5 @@
+import Button from "./Button";
+
 export default function HeroSection(){
     return(
         // {/* Bagian Sambutan */}
@@ -7,6 +9,12 @@ export default function HeroSection(){
                   <p className="text-sm sm:text-lg font-inter">
                     We are a catering service that provides healthy, customizable food, with fast delivery to all major cities in Indonesia. SEA Catering is here to support your healthy lifestyle, anytime and anywhere.
                   </p>
+                  <div className="w-full flex justify-end my-10">
+                  <Button
+                  link={'/menu'}
+                  text={'Lihat Menu'}
+                  />
+                  </div>
                 </div>
                 <div className="w-full h-full">
                 <img className="object-cover w-full  sm:h-full mask-background-x-between-70-90" src="/Images/HeroSection.png" alt="Catering" />

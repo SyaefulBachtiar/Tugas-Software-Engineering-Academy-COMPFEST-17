@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { db } from "../firebase/config";
+import { collection, addDoc, Timestamp } from "firebase/firestore";
 
 export default function SubscriptionComponent() {
   const [form, setForm] = useState({
@@ -46,8 +48,8 @@ export default function SubscriptionComponent() {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = async (e) => {
+     e.preventDefault();
 
     if (!form.name || !form.phone || !form.package || form.meals.length === 0 || form.days.length === 0) {
       alert("Mohon lengkapi semua bidang yang wajib diisi (*)");
@@ -57,6 +59,18 @@ export default function SubscriptionComponent() {
     const total = calculatePrice(form.package, form.meals, form.days);
     setPrice(total);
     setSubmitted(true);
+
+    try {
+      await addDoc(collection(db, "subscriptions"), {
+        ...form,
+        total,
+        createdAt: Timestamp.now(),
+      });
+      console.log("Data berhasil dikirim ke Firebase.");
+    } catch (error) {
+      console.error("Gagal menyimpan ke Firebase:", error);
+      alert("Terjadi kesalahan saat mengirim data. Silakan coba lagi.");
+    }
   };
 
   return (
