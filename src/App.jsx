@@ -10,6 +10,8 @@ import ContactPage from "./pages/ContactPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import UserDashboard from "./pages/UserDashboard";
+
 
 
 export default function App(){
@@ -23,6 +25,7 @@ export default function App(){
         <Route path="/login" element= {<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/contact" element={<ContactPage />} />
+        <Route path="/dashboard" element={<ProtectedRoute> <UserDashboard /> </ProtectedRoute>} />
        </Routes>
       
     </>
