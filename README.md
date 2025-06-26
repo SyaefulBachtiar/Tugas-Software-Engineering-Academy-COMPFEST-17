@@ -49,6 +49,6 @@
     }
    }
 
-   ## 🚀 Link Deploymetn:
+   🚀 Link Deploymetn:
     https://tugas-software-engineering-academy.vercel.app/
    
