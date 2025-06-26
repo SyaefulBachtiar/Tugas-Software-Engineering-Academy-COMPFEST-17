@@ -1,16 +1,54 @@
-<<<<<<< HEAD
-# React + Vite
+## 🛠️ Teknologi yang Digunakan
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- **Frontend**: React + Tailwind CSS
+- **Backend**: Firebase Authentication & Firestore
+- **Icon**: Lucide React Icons
 
-Currently, two official plugins are available:
+## 🚀 Instalasi Lokal
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. **Clone repositori ini**
+   ```bash
+   git clone https://github.com/SyaefulBachtiar/Tugas-Software-Engineering-Academy-COMPFEST-17.git
+   cd Tugas-Software-Engineering-Academy-COMPFEST-17
+   
+2. **Install dependencies**
+   ```bash
+   npm install
 
-## Expanding the ESLint configuration
+4. **Atur Firebase config**
+   ```bash
+   Buat file .env.local dan masukkan konfigurasi Firebase:
+   VITE_API_KEY=your_api_key
+   VITE_AUTH_DOMAIN=your_project.firebaseapp.com
+   VITE_PROJECT_ID=your_project_id
+   VITE_STORAGE_BUCKET=your_project.appspot.com
+   VITE_MESSAGING_SENDER_ID=your_sender_id
+   VITE_APP_ID=your_app_id
+   
+6. **Jalankan secara lokal**
+   ```bash
+   npm run dev
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-=======
-# Tugas-Software-Engineering-Academy-COMPFEST-17
->>>>>>> 7d0577e3ec63410cdfb8804e28d39757aacb311f
+7. **Firebase Security Rules (Contoh)**
+   ```bash
+   rules_version = '2';
+   service cloud.firestore {
+   match /databases/{database}/documents {
+    
+    match /subscriptions/{docId} {
+      allow create: if request.auth != null && request.resource.data.userId == request.auth.uid;
+      allow read: if request.auth != null && (
+        request.auth.token.role == 'admin' || resource.data.userId == request.auth.uid
+      );
+      allow update, delete: if request.auth != null && resource.data.userId == request.auth.uid;
+    }
+
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+      }
+    }
+   }
+
+   🚀 Link Deploymetn:
+    https://tugas-software-engineering-academy.vercel.app/
+   
