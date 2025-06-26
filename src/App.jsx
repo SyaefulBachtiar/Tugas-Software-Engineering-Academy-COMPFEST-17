@@ -7,6 +7,9 @@ import Menu from "./pages/Menu";
 import Navbar from "./components/Navbar";
 import Subscription from "./pages/Subscription";
 import ContactPage from "./pages/ContactPage";
+import ProtectedRoute from "./components/ProtectedRoute";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 
 export default function App(){
@@ -16,7 +19,9 @@ export default function App(){
        <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/menu" element={<Menu />} />
-        <Route path="/subscription" element={<Subscription />} />
+        <Route path="/subscription" element={<ProtectedRoute><Subscription /></ProtectedRoute>} />
+        <Route path="/login" element= {<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/contact" element={<ContactPage />} />
        </Routes>
       
