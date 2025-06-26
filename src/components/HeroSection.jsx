@@ -12,7 +12,7 @@ export default function HeroSection(){
                   <div className="w-full flex justify-end my-10">
                   <Button
                   link={'/menu'}
-                  text={'Lihat Menu'}
+                  text={'See Menu'}
                   />
                   </div>
                 </div>

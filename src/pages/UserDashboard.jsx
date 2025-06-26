@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Calendar, Package, Clock, DollarSign, AlertCircle, Pause, X, CheckCircle, User, MapPin } from "lucide-react";
 import { onAuthStateChanged } from "firebase/auth";
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { collection, query, where, getDocs, doc, updateDoc } from "firebase/firestore";
 import { auth, db } from "../firebase/config";
 
 export default function UserDashboard() {
@@ -26,7 +26,7 @@ export default function UserDashboard() {
             mealType: data.meals.join(" & "),
             deliveryDays: data.days,
             totalPrice: data.total,
-            status: "Active",
+            status: data.status,
             startDate: data.createdAt.toDate().toISOString(),
             nextDelivery: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
             address: "-", // Optional: Add address if saved in form
@@ -43,11 +43,21 @@ export default function UserDashboard() {
   }, []);
 
   const updateSubscription = async (updates) => {
-    if (!user) return;
-    const docRef = doc(db, "subscriptions", user.uid);
+  if (!user) return;
+
+  const q = query(collection(db, "subscriptions"), where("userId", "==", user.uid));
+  const querySnapshot = await getDocs(q);
+
+  if (!querySnapshot.empty) {
+    const docId = querySnapshot.docs[0].id;
+    const docRef = doc(db, "subscriptions", docId);
     await updateDoc(docRef, updates);
     setSubscription((prev) => ({ ...prev, ...updates }));
-  };
+  } else {
+    console.warn("Subscription document not found for user:", user.uid);
+  }
+};
+
 
   const handlePause = async () => {
     if (!pauseDates.start || !pauseDates.end) {
@@ -93,10 +103,22 @@ export default function UserDashboard() {
       setShowCancelModal(false);
     } catch (error) {
       setStatusMessage("Gagal membatalkan langganan. Silakan coba lagi.");
+      setShowCancelModal(false)
     }
     setLoading(false);
   };
 
+  const handleUncancle = async () => {
+    setLoading(true);
+    try {
+      await updateSubscription({ status: "Active"});
+      setStatusMessage("Langganan berhasil diaktifkan kembali!");
+    } catch (error) {
+      setStatusMessage("Gagal mengaktifkan langganan. Silakan coba lagi.");
+    }
+    setLoading(false);
+  };
+  
   const handleReactivate = async () => {
     setLoading(true);
     try {
@@ -302,8 +324,16 @@ export default function UserDashboard() {
                   {subscription.status === "Cancelled" && (
                     <div className="text-center p-4 bg-red-50 rounded-lg">
                       <AlertCircle className="w-8 h-8 text-red-500 mx-auto mb-2" />
-                      <p className="text-red-700 text-sm">Langganan telah dibatalkan</p>
+                      <p className="text-red-700 text-sm mb-10">Langganan telah dibatalkan</p>
+                      <button
+                        onClick={handleUncancle}
+                        disabled={loading}
+                        className="flex-1 bg-red-600 hover:bg-red-700 disabled:bg-gray-400 text-white px-4 py-2 rounded-lg transition-colors"
+                      >
+                        {loading ? "Memproses..." : "Langganan Lagi ?"}
+                      </button>
                     </div>
+                  
                   )}
                 </div>
               </div>

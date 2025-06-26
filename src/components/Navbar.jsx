@@ -3,7 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../firebase/config"; // pastikan path-nya sesuai
-import { User, ChevronDown, LogOut, Settings, UserCircle } from "lucide-react";
+import { User, ChevronDown, LogOut, UserCircle } from "lucide-react";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -165,16 +165,6 @@ export default function Navbar() {
                       Dashboard
                     </button>
                     
-                    <button
-                      onClick={() => {
-                        setIsProfileOpen(false);
-                        navigate('/settings');
-                      }}
-                      className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors duration-200"
-                    >
-                      <Settings className="w-4 h-4 mr-3" />
-                      Pengaturan
-                    </button>
                   </div>
 
                   <div className="border-t border-gray-100 py-1">
@@ -262,17 +252,6 @@ export default function Navbar() {
                 >
                   <UserCircle className="w-4 h-4 mr-2" />
                   Dashboard
-                </NavLink>
-              </li>
-              
-              <li>
-                <NavLink
-                  to="/settings"
-                  onClick={() => setIsOpen(false)}
-                  className="flex items-center py-2 text-gray-700"
-                >
-                  <Settings className="w-4 h-4 mr-2" />
-                  Pengaturan
                 </NavLink>
               </li>
               

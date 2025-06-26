@@ -31,11 +31,8 @@ export default function Contact() {
           {/* Header */}
           <div className="text-center mb-12">
             <h1 className="text-5xl font-bold text-white mb-4 animate-fade-in">
-              Mari <span className="text-yellow-200">Terhubung</span>
+              Let's <span className="text-yellow-200">Connect</span>
             </h1>
-            <p className="text-xl text-white opacity-90 animate-fade-in-delay">
-              Hubungi kami untuk memulai perjalanan kuliner Anda
-            </p>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-12 items-start">
@@ -52,7 +49,7 @@ export default function Contact() {
                   <User className="w-10 h-10 text-white" />
                 </div>
                 <h2 className="text-3xl font-bold text-gray-800 mb-2">Contact Detail</h2>
-                <p className="text-gray-600">Siap melayani Anda 24/7</p>
+                <p className="text-gray-600">Ready to serve you 24/7</p>
               </div>
 
               <div className="space-y-6">
@@ -61,7 +58,7 @@ export default function Contact() {
                     <User className="w-6 h-6" />
                   </div>
                   <div>
-                    <p className="font-semibold">Manajer</p>
+                    <p className="font-semibold">Manager</p>
                     <p className="text-lg">Brian</p>
                   </div>
                 </div>
@@ -97,8 +94,8 @@ export default function Contact() {
                     <MapPin className="w-6 h-6" />
                   </div>
                   <div>
-                    <p className="font-semibold">Lokasi</p>
-                    <p className="text-lg">Jakarta Pusat</p>
+                    <p className="font-semibold">Location</p>
+                    <p className="text-lg">Center of Jakarta</p>
                   </div>
                 </div>
               </div>
@@ -107,26 +104,26 @@ export default function Contact() {
             {/* Quick Message Form */}
             <div className="bg-white rounded-3xl shadow-2xl p-8">
               <h3 className="text-2xl font-bold text-gray-800 mb-6 text-center">
-                Kirim Pesan Cepat
+                Send Quick Messages
               </h3>
               
               {showSuccess && (
                 <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-xl mb-6 animate-bounce">
-                  ✨ Pesan berhasil dikirim! Kami akan segera menghubungi Anda.
+                  ✨ Message sent successfully! We will contact you soon.
                 </div>
               )}
 
               <div className="space-y-6">
                 <div>
                   <div className="block text-gray-700 font-semibold mb-2">
-                    Nama Anda
+                    Your Name
                   </div>
                   <input
                     type="text"
                     value={formData.name}
                     onChange={(e) => setFormData({...formData, name: e.target.value})}
                     className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-[#ff9933] focus:outline-none transition-colors"
-                    placeholder="Masukkan nama Anda..."
+                    placeholder="Enter your name..."
                   />
                 </div>
                 
@@ -139,7 +136,7 @@ export default function Contact() {
                     onChange={(e) => setFormData({...formData, message: e.target.value})}
                     rows="4"
                     className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-[#ff9933] focus:outline-none transition-colors resize-none"
-                    placeholder="Tulis pesan Anda di sini..."
+                    placeholder="Type your message..."
                   ></textarea>
                 </div>
                 
@@ -148,12 +145,12 @@ export default function Contact() {
                   className="w-full bg-gradient-to-r from-[#ff9933] to-[#ffd194] text-white font-bold py-4 px-6 rounded-xl hover:from-[#e68a2e] hover:to-[#ffb347] transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 shadow-lg"
                 >
                   <Send className="w-5 h-5" />
-                  Kirim Pesan
+                  Send Message
                 </button>
               </div>
               
               <div className="mt-8 text-center">
-                <p className="text-gray-600 mb-4">Atau hubungi langsung via:</p>
+                <p className="text-gray-600 mb-4">Or contact directly via:</p>
                 <div className="flex justify-center gap-4">
                   <a
                     href="https://wa.me/08123456789"
