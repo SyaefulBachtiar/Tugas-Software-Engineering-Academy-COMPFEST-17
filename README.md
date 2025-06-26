@@ -11,10 +11,12 @@
    git clone https://github.com/username/sea-catering-adminhttps://github.com/SyaefulBachtiar/Tugas-Software-Engineering-Academy-COMPFEST-17.git
    cd Tugas-Software-Engineering-Academy-COMPFEST-17
    
-2. Install dependencies
+2. **Install dependencies**
+   ```bash
    npm install
 
-3. Atur Firebase config
+4. **Atur Firebase config**
+   ```bash
    Buat file .env.local dan masukkan konfigurasi Firebase:
    VITE_API_KEY=your_api_key
    VITE_AUTH_DOMAIN=your_project.firebaseapp.com
@@ -23,10 +25,12 @@
    VITE_MESSAGING_SENDER_ID=your_sender_id
    VITE_APP_ID=your_app_id
    
-5. Jalankan secara lokal
+6. **Jalankan secara lokal**
+   ```bash
    npm run dev
 
-6. Firebase Security Rules (Contoh)
+7. **Firebase Security Rules (Contoh)**
+   ```bash
    rules_version = '2';
    service cloud.firestore {
    match /databases/{database}/documents {
@@ -45,6 +49,6 @@
     }
    }
 
-   Link Deploymetn:
+   ## 🚀 Link Deploymetn:
     https://tugas-software-engineering-academy.vercel.app/
    
