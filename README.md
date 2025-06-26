@@ -8,7 +8,7 @@
 
 1. **Clone repositori ini**
    ```bash
-   git clone https://github.com/username/sea-catering-adminhttps://github.com/SyaefulBachtiar/Tugas-Software-Engineering-Academy-COMPFEST-17.git
+   git clone https://github.com/SyaefulBachtiar/Tugas-Software-Engineering-Academy-COMPFEST-17.git
    cd Tugas-Software-Engineering-Academy-COMPFEST-17
    
 2. **Install dependencies**
