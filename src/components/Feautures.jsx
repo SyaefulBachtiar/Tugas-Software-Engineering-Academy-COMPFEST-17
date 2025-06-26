@@ -1,5 +1,4 @@
 import Waves from "./Waves"
-import WavesBottom from "./WavesBottom"
 
 export default function Feautures(){
   const TextValue = [
@@ -31,7 +30,6 @@ export default function Feautures(){
                     }
                   </ul>
                   </div>
-                  <WavesBottom />
                 </section>
     )
 }

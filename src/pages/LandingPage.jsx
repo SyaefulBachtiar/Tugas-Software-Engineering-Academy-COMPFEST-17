@@ -8,15 +8,12 @@ import Testimonial from "../components/Testimonial";
 
 export default function LandingPage(){
   return(
-    <div className="font-sans text-gray-800 bg-white min-h-screen overflow-x-hidden my-[500px]">
-      <SmoothScroll>
+    <div className="font-sans text-gray-800 bg-white min-h-screen overflow-x-hidden">
         <HeroSection />
         <Feautures />
         <Contact />
         <Testimonial />
         <Footer />
-        </SmoothScroll>
-
       </div>
   );
 }

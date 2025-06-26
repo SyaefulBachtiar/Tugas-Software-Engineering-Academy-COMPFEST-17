@@ -27,9 +27,9 @@ import Button from "./Button";
 
 export default function HeroSection() {
   return (
-    <section className="w-full h-screen flex flex-col sm:flex-row items-center justify-center px-6 sm:px-16 gap-10 sm:gap-0">
+    <section className="w-full h-screen flex flex-col sm:flex-row px-6 sm:px-16 gap-10 items-center sm:gap-10">
       {/* Text Section */}
-      <div className="w-full sm:w-1/2 flex flex-col justify-center items-start sm:items-start text-left">
+      <div className="w-full sm:w-1/2 flex flex-col sm:items-start text-left">
         <h2 className="text-3xl sm:text-5xl font-semibold font-inter mb-6 leading-tight">
           Welcome to <span className="text-primary">SEA Catering</span>
         </h2>
