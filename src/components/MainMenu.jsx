@@ -69,7 +69,7 @@ export default function MainMenu() {
       {/* Hero Section */}
       <div className="container mx-auto px-4 pt-16 pb-8">
         <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent h-[70px]">
+          <h1 className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent h-[140px] sm:h-[70px]">
             Our Meal Packages
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
