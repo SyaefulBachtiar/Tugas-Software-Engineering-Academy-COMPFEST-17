@@ -53,7 +53,7 @@
     https://tugas-software-engineering-academy.vercel.app
 
 
-   ## Informasi Akun
+## Informasi Akun
 
    **Akun User**
    Email: syaefulbachtiar2@gmail.com
