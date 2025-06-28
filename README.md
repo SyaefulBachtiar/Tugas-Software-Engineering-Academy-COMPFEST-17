@@ -49,6 +49,17 @@
     }
    }
 
-   🚀 Link Deploymetn:
-    https://tugas-software-engineering-academy.vercel.app/
+   **🚀 Link Deploymetn:**
+    https://tugas-software-engineering-academy.vercel.app
+
+
+   ## Informasi Akun
+
+   **Akun User**
+   Email: syaefulbachtiar2@gmail.com
+   Password: Syaeful24*
+
+   **Akun Admin**
+   Email: admin1@gmail.com
+   Password: Admin321*
    
